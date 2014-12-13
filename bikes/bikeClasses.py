@@ -17,6 +17,8 @@ class BikeShop(object):
 
 	def list_bikes(self):
 		print "We have...".format(self.name)
+		for b, q in self.inventory.iteritems():
+            print "  {} x {}".format(str(q), b.model_name)
 		pass
 
 class Customer(object):
