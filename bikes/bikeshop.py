@@ -10,7 +10,7 @@ soulcycle = BikeShop("Soul Cycle")
 mountainbike = Bicycle("Mountain Bike", 400, 350)
 babybike = Bicycle("Kid's Bike", 200, 250)
 zacbike = Bicycle("A Zac bike!", 375, 300)
-greenbike = Bicycle("Green Bike". 289, 698)
+greenbike = Bicycle("Green Bike", 289, 698)
 redbike = Bicycle("Red Bike", 106, 999)
 goldbike = Bicycle("This shit is made of gold!", 700, 12000)
 
@@ -25,8 +25,10 @@ kimye = Customer("Kimye, yo", 325933)
 
 #Functions
 bikes2you.inventory = {babybike: 2}
+telemachus.buy_bike(bikes2you, babybike)
 
 print bikes2you.name
 print mountainbike.weight 
 print bikes2you.inventory
+print bikes2you.profit
 
