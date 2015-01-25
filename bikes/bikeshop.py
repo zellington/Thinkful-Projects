@@ -9,7 +9,7 @@ soulcycle = BikeShop("Soul Cycle")
 #Create Bikes
 mountainbike = Bicycle("Mountain Bike", 400, 350)
 babybike = Bicycle("Kid's Bike", 200, 250)
-zacbike = Bicycle("Zac bike", 375, 300)
+zacbike = Bicycle("Zac Bike", 375, 300)
 greenbike = Bicycle("Green Bike", 289, 698)
 redbike = Bicycle("Red Bike", 106, 999)
 goldbike = Bicycle("Golden Bicycle", 700, 12000)
@@ -24,19 +24,27 @@ kimye = Customer("Kimye, yo", 325933)
 
 
 #Functions
-bikes2you.inventory = {babybike: 2, mountainbike:3, zacbike:4, greenbike:1, redbike:3, goldbike:1}
+bikes2you.inventory = {babybike: 2, mountainbike:3, zacbike:4, goldbike:1}
+brooklynpeddler.inventory = {mountainbike:3, zacbike:4, greenbike:1, redbike:3, goldbike:1}
+soulcycle.inventory = {goldbike:100}
 
-print "Welcome to " + bikes2you.name + "!"
-print ""
-print bikes2you.list_bikes()
+#Intro Text
+print "Welcome to Bike World! \n\nWe have three great bike stores: {}, {}, and {} ".format(brooklynpeddler.name, bikes2you.name, soulcycle.name) 
+#Show Bike Store Inventories
+bikes2you.list_bikes()
+brooklynpeddler.list_bikes()
+soulcycle.list_bikes()
+#Show Customers
 telemachus.can_buy(bikes2you)
-print ""
+jolene.can_buy(brooklynpeddler)
+kimye.can_buy(soulcycle)
 dante.can_buy(bikes2you)
-print ""
+
+
 telemachus.buy_bike(bikes2you, zacbike)
 dante.buy_bike(bikes2you, babybike)
-
-print bikes2you.list_bikes()
+kimye.buy_bike(soulcycle, goldbike)
+bikes2you.list_bikes()
 print bikes2you.show_profit()
-print "Telemachus now has " + str(telemachus.budget) + " to spend."
-print "Dante now has " + str(dante.budget) + " to spend."
+print brooklynpeddler.show_profit()
+print soulcycle.show_profit()

@@ -21,19 +21,19 @@ class BikeShop(object):
 	def list_bikes(self):
 		print "{} currently has in stock:".format(self.name)
 		for bike, quantity in self.inventory.iteritems():
-			if quantity <= 1:
-				print "  {} {}".format(str(quantity), bike.model)
+			if quantity == 1:
+				print "  {} {} for ${}".format(str(quantity), bike.model, bike.sale_price)
 			else:
-				print "  {} {}s".format(str(quantity), bike.model)
-        #print ""
+				print "  {} {}s for ${} each".format(str(quantity), bike.model, bike.sale_price)
+        print ""
 
 	def sell_bike(self, bike):
 		self.inventory[bike] -= 1
 		self.profit += bike.production_cost * 0.2
 
 	def show_profit(self):
-		print "The profit for {} is ${}.".format(self.name, self.profit)
-
+		return "The profit for {} is ${}.".format(self.name, self.profit)
+		print ""
 class Customer(object):
 	def __init__(self, name, budget):
 		self.name = name
@@ -47,11 +47,12 @@ class Customer(object):
 					print bike
 				else:
 					pass
+		print ""
 				
 
 	def buy_bike(self, shop, bike):
 		self.budget -= bike.sale_price
-		print "{} bought a {} for {}".format(self.name, bike.model, bike.sale_price)
+		print "{} bought a {} for {}".format(self.name, bike.model, bike.sale_price) + " and has ${} left".format(self.budget)
 		shop.sell_bike(bike)
 		
 	
