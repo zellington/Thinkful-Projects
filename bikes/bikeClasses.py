@@ -8,7 +8,7 @@ class Bicycle(object):
 		#self.markup = 1.2
 		#self.finalprice = self.production_cost * self.markup
 	def __repr__(self, model):
-		print self.model
+		return '{}'.format(str(self.model))
 
 class BikeShop(object):
 	def __init__(self, name):
@@ -18,11 +18,10 @@ class BikeShop(object):
 		#need to add a way to list price
 
 	def list_bikes(self):
-		print "We have...".format(self.name)
+		print "{} currently has in stock:".format(self.name)
 		for bike, quantity in self.inventory.iteritems():
-            print "{0} {1}".format(str(quantity), bike.model_name)
-		pass
-		#print ""
+            print "  {} x {}".format(str(quantity), bike.model_name)
+        print ""
 
 	def sell_bike(self, bike):
 

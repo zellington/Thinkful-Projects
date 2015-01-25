@@ -29,6 +29,6 @@ telemachus.buy_bike(bikes2you, babybike)
 
 print bikes2you.name
 print mountainbike.weight 
-print bikes2you.inventory
+print str(bikes2you.inventory)
 print bikes2you.profit
 
