@@ -5,10 +5,11 @@ class Bicycle(object):
 		self.model = model
 		self.weight = weight
 		self.production_cost = production_cost
+		self.sale_price = production_cost * 1.2
 		#self.markup = 1.2
 		#self.finalprice = self.production_cost * self.markup
-	def __repr__(self, model):
-		return '{}'.format(str(self.model))
+	def __repr__(self):
+		return '{}'.format(self.model)
 
 class BikeShop(object):
 	def __init__(self, name):
@@ -20,29 +21,35 @@ class BikeShop(object):
 	def list_bikes(self):
 		print "{} currently has in stock:".format(self.name)
 		for bike, quantity in self.inventory.iteritems():
-            print "  {} x {}".format(str(quantity), bike.model_name)
-        print ""
+			if quantity <= 1:
+				print "  {} {}".format(str(quantity), bike.model)
+			else:
+				print "  {} {}s".format(str(quantity), bike.model)
+        #print ""
 
 	def sell_bike(self, bike):
-
-		if bike.model in self.inventory:
-			self.inventory[bike] -= 1
-			self.profit += bike.production_cost * 1.2
-
-		else:
-			print "Sorry, choose another!"
+		self.inventory[bike] -= 1
+		self.profit += bike.production_cost * 0.2
 
 	def show_profit(self):
-		print "The profit for {} is ${}.".format(self.name, self.profit}
+		print "The profit for {} is ${}.".format(self.name, self.profit)
 
 class Customer(object):
 	def __init__(self, name, budget):
 		self.name = name
 		self.budget = budget
 
+	def can_buy(self, shop):
+		print self.name + " can buy:"
+		for bike in shop.inventory.iteritems():
+			#if bike.sale_price <= self.budget:
+			print bike
+			#else:
+				#pass
+
 	def buy_bike(self, shop, bike):
-		self.budget -= bike.production_cost * 1.2
-		print "{} bought a {} for {}"
+		self.budget -= bike.sale_price
+		print "{} bought a {} for {}".format(self.name, bike.model, bike.sale_price)
 		shop.sell_bike(bike)
 		
 	
