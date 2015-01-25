@@ -41,11 +41,13 @@ class Customer(object):
 
 	def can_buy(self, shop):
 		print self.name + " can buy:"
-		for bike in shop.inventory.iteritems():
-			#if bike.sale_price <= self.budget:
-			print bike
-			#else:
-				#pass
+		for bike, quantity in shop.inventory.iteritems():
+			if quantity > 0:
+				if (bike.sale_price <= self.budget):
+					print bike
+				else:
+					pass
+				
 
 	def buy_bike(self, shop, bike):
 		self.budget -= bike.sale_price

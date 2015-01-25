@@ -16,7 +16,7 @@ goldbike = Bicycle("Golden Bicycle", 700, 12000)
 
 #Create Customers
 
-telemachus = Customer("Telemachus", 5000)
+telemachus = Customer("Telemachus", 500)
 dante = Customer("Dante", 300)
 figero = Customer("Figero", 693)
 jolene = Customer("Jo Jo", 1200)
@@ -26,12 +26,17 @@ kimye = Customer("Kimye, yo", 325933)
 #Functions
 bikes2you.inventory = {babybike: 2, mountainbike:3, zacbike:4, greenbike:1, redbike:3, goldbike:1}
 
-#print "Welcome to " + bikes2you.name + "!"
-#print bikes2you.list_bikes()
-print telemachus.can_buy(bikes2you)
-telemachus.buy_bike(bikes2you, babybike)
+print "Welcome to " + bikes2you.name + "!"
+print ""
+print bikes2you.list_bikes()
+telemachus.can_buy(bikes2you)
+print ""
+dante.can_buy(bikes2you)
+print ""
+telemachus.buy_bike(bikes2you, zacbike)
+dante.buy_bike(bikes2you, babybike)
 
-#print bikes2you.list_bikes()
-#print bikes2you.show_profit()
-#print telemachus.budget
-
+print bikes2you.list_bikes()
+print bikes2you.show_profit()
+print "Telemachus now has " + str(telemachus.budget) + " to spend."
+print "Dante now has " + str(dante.budget) + " to spend."
