@@ -40,11 +40,13 @@ jolene.can_buy(brooklynpeddler)
 kimye.can_buy(soulcycle)
 dante.can_buy(bikes2you)
 
-
+#Buy Bikes
 telemachus.buy_bike(bikes2you, zacbike)
 dante.buy_bike(bikes2you, babybike)
 kimye.buy_bike(soulcycle, goldbike)
-bikes2you.list_bikes()
+#Show Bike Inventories Again
+###bikes2you.list_bikes()
+#Show Profit
 print bikes2you.show_profit()
 print brooklynpeddler.show_profit()
 print soulcycle.show_profit()
