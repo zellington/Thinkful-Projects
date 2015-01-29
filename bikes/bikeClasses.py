@@ -19,13 +19,13 @@ class BikeShop(object):
 		#need to add a way to list price
 
 	def list_bikes(self):
-		print "{} currently has in stock:".format(self.name)
+		print "{} currently has in stock: \n".format(self.name)
 		for bike, quantity in self.inventory.iteritems():
 			if quantity == 1:
 				print "  {} {} for ${}".format(str(quantity), bike.model, bike.sale_price)
 			else:
 				print "  {} {}s for ${} each".format(str(quantity), bike.model, bike.sale_price)
-        print ""
+        	print "\n"
 
 	def sell_bike(self, bike):
 		self.inventory[bike] -= 1
@@ -40,7 +40,7 @@ class Customer(object):
 		self.budget = budget
 
 	def can_buy(self, shop):
-		print self.name + " can buy:"
+		print "Hey {} , you can buy: \n".format(self.name)
 		for bike, quantity in shop.inventory.iteritems():
 			if quantity > 0:
 				if (bike.sale_price <= self.budget):
@@ -54,5 +54,6 @@ class Customer(object):
 		self.budget -= bike.sale_price
 		print "{} bought a {} for {}".format(self.name, bike.model, bike.sale_price) + " and has ${} left".format(self.budget)
 		shop.sell_bike(bike)
+
 		
 	
