@@ -47,21 +47,29 @@ def welcome():
 		welcome()
 #Get Customer Name		
 def get_name():
-	name = raw_input("Hey, what's your name?  ('Dante', 'Kimye','Jo-Jo', 'Figero', or 'Telemachus')")
+	
+	raw_name = raw_input("Hey, what's your name?  ('Dante', 'Kimye','Jo-Jo', 'Figero', or 'Telemachus')")
+	person = None
 	for customer in customers:
-		return customer
-		if name == customer.name:
-			print "Welcome {}".format(str(customer.name)) + "!"
-			customer.can_buy(shop)
-			pass
-		else:
-			print "Hey, that's not right!"
-			get_name()
+		
+		if raw_name == customer.name:
+			person = customer
+		
+	if person:
+		print "Welcome {}".format(str(person.name)) + "!"
+		person.can_buy(shop)
+		return person
+		pass
+
+	else:
+		print "Hey, that's not right!"
+		get_name()
 
 
 #Choose Bike Store
 shop = welcome()
 customer = get_name()
+print "Customer is: " + str(customer.name)
 #Show Customers
 #telemachus.can_buy(bikes2you)
 #jolene.can_buy(brooklynpeddler)
