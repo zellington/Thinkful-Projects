@@ -35,6 +35,7 @@ def get(name):
         for k, s in reader:
             if k == name:
                 print s
+                return s
 
 
 def make_parser():
@@ -72,7 +73,7 @@ def main():
         print "Stored {!r} as {!r}".format(snippet, name)
     elif command == "get":
         name = get(arguments)
-        print "Found snippet: {!r}".format(str(snippet))
+        print "Found snippet: {!r}".format(name)
 
 if __name__ == "__main__":
     main()
