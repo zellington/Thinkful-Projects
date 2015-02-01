@@ -32,9 +32,10 @@ def get(name):
     logging.debug("Retrieving file")
     with open("snippets.csv", "r") as f:
         reader = csv.DictReader (f, delimiter=",")
-        if name == name:
-            print(["snippet"])
-        
+        for k, s in reader:
+            if k == name:
+                print s
+
 
 def make_parser():
     """Construct the command line parser """
