@@ -30,13 +30,23 @@ def get(name):
     logging.error("FIXME: Unimplemented - get({!r})".format(name))
     logging.info("Retrieving {!r}".format(name))
     logging.debug("Retrieving file")
+    #snippet = None
     with open("snippets.csv", "r") as f:
-        reader = csv.DictReader (f, delimiter=",")
-        for k, s in reader:
-            if k == name:
-                print s
-                return s
-
+        reader = csv.reader(f, delimiter=",")
+        for row in reader:
+            if row[0] == name:
+              return row[1]
+            else:
+              pass
+def list():
+    logging.error("FIXME: Unimplemented - list")
+    logging.info("Retrieving list")
+    logging.debug("Retrieving list")
+    #snippet = None
+    with open("snippets.csv", "r") as f:
+        reader = csv.reader(f, delimiter=",")
+        for row in reader:
+            print row[0]
 
 def make_parser():
     """Construct the command line parser """
@@ -56,6 +66,10 @@ def make_parser():
     logging.debug("Constructing get subparser")
     get_parser = subparsers.add_parser("get", help="Retrieve a snippet")
     get_parser.add_argument("name", help="The name of the snippet")
+
+    #Subparser for list command
+    logging.debug("Constructing list subparser")
+    list_parser = subparsers.add_parser("list", help="Get list of names")
     
     return parser
 
@@ -72,8 +86,12 @@ def main():
         name, snippet = put(**arguments)
         print "Stored {!r} as {!r}".format(snippet, name)
     elif command == "get":
-        name = get(arguments)
+        #add warning if snippet does not exist
+        name = get(**arguments)
         print "Found snippet: {!r}".format(name)
+    elif command == "list":
+        print "Here are the available snippet names: \n" 
+        get_list = list()
 
 if __name__ == "__main__":
     main()
