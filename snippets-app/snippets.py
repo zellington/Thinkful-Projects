@@ -2,20 +2,29 @@ import logging
 import csv
 import argparse
 import sys
+import psycopg2
 
 # Set the log output file, and the log level
 logging.basicConfig(filename="output.log", level=logging.DEBUG)
+logging.debug("Connecting to PostgreSQL")
+connection = psycopg2.connect("dbname='snippets' host='localhost'")
+logging.debug("Database connection established.")
 
 def put(name, snippet, filename):
     """ Store a snippet with an associated name in the CSV file """
     logging.info("Writing {!r}:{!r} to {!r}".format(name, snippet, filename))
-    logging.debug("Opening file")
-    with open(filename, "a") as f:
-        writer = csv.writer(f)
-        logging.debug("Writing snippet to file")
-        writer.writerow([name, snippet])
-    logging.debug("Write sucessful")
+    cursor = connection.cursor()
+    command = "insert into snippets values (%s, %s)"
+    cursor.execute(command, (name, snippet))
+    connection.commit()
+    logging.debug("Snippet stored successfully.")
     return name, snippet
+    # with open(filename, "a") as f:
+    #     writer = csv.writer(f)
+    #     logging.debug("Writing snippet to file")
+    #     writer.writerow([name, snippet])
+    # logging.debug("Write sucessful")
+    # return name, snippet
 
 
 def get(name):
@@ -30,23 +39,35 @@ def get(name):
     logging.error("FIXME: Unimplemented - get({!r})".format(name))
     logging.info("Retrieving {!r}".format(name))
     logging.debug("Retrieving file")
+    message = {}
+    cursor = connection.cursor()
+    command = "select message from snippets where keyword='%s'" % name 
+    cursor.execute(command)
+    results = cursor.fetchone()
+    return results
+    #connection.commit()
+    logging.debug("Snippet retrieved successfully.")
+    
+    
+
     #snippet = None
-    with open("snippets.csv", "r") as f:
-        reader = csv.reader(f, delimiter=",")
-        for row in reader:
-            if row[0] == name:
-              return row[1]
-            else:
-              pass
+    # with open("snippets.csv", "r") as f:
+    #     reader = csv.reader(f, delimiter=",")
+    #     for row in reader:
+    #         if row[0] == name:
+    #           return row[1]
+    #         else:
+    #           pass
 def list():
     logging.error("FIXME: Unimplemented - list")
     logging.info("Retrieving list")
     logging.debug("Retrieving list")
     #snippet = None
-    with open("snippets.csv", "r") as f:
-        reader = csv.reader(f, delimiter=",")
-        for row in reader:
-            print row[0]
+    cursor = connection.cursor()
+    command = "select keyword from snippets" 
+    cursor.execute(command)
+    my_list = cursor.fetchall()
+    return my_list
 
 def make_parser():
     """Construct the command line parser """
@@ -90,8 +111,8 @@ def main():
         name = get(**arguments)
         print "Found snippet: {!r}".format(name)
     elif command == "list":
-        print "Here are the available snippet names: \n" 
         get_list = list()
+        print "Here are the available snippet names: \n" + str(get_list)
 
 if __name__ == "__main__":
     main()
