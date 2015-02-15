@@ -9,24 +9,22 @@ logging.basicConfig(filename="output.log", level=logging.DEBUG)
 logging.debug("Connecting to PostgreSQL")
 connection = psycopg2.connect("dbname='snippets' host='localhost'")
 logging.debug("Database connection established.")
-
+# Set put function
 def put(name, snippet, filename):
     """ Store a snippet with an associated name in the CSV file """
     logging.info("Writing {!r}:{!r} to {!r}".format(name, snippet, filename))
     cursor = connection.cursor()
-    command = "insert into snippets values (%s, %s)"
-    cursor.execute(command, (name, snippet))
+    try:
+        command = "insert into snippets values (%s, %s)"
+        cursor.execute(command, (name, snippet))
+    except psycopg2.IntegrityError as e:
+        connection.rollback()
+        command = "update snippets set message=%s where keyword=%s"
+        cursor.execute(command, (snippet, name))
     connection.commit()
     logging.debug("Snippet stored successfully.")
     return name, snippet
-    # with open(filename, "a") as f:
-    #     writer = csv.writer(f)
-    #     logging.debug("Writing snippet to file")
-    #     writer.writerow([name, snippet])
-    # logging.debug("Write sucessful")
-    # return name, snippet
-
-
+#Set get functiion
 def get(name):
     """Retrieve the snippet with a given name.
 
@@ -44,7 +42,10 @@ def get(name):
     command = "select message from snippets where keyword='%s'" % name 
     cursor.execute(command)
     results = cursor.fetchone()
-    return results
+    if results:
+        return results
+    else:
+        print "Sorry, no snippet with that name! Try again"
     #connection.commit()
     logging.debug("Snippet retrieved successfully.")
     
@@ -109,7 +110,10 @@ def main():
     elif command == "get":
         #add warning if snippet does not exist
         name = get(**arguments)
-        print "Found snippet: {!r}".format(name)
+        if name:
+            print "Found snippet: {!r}".format(name)
+        else: 
+            pass
     elif command == "list":
         get_list = list()
         print "Here are the available snippet names: \n" + str(get_list)
