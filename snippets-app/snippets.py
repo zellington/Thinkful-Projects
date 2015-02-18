@@ -11,16 +11,18 @@ connection = psycopg2.connect("dbname='snippets' host='localhost'")
 logging.debug("Database connection established.")
 # Set put function
 def put(name, snippet, filename):
-    """ Store a snippet with an associated name in the CSV file """
+    """ Store a snippet with an associated name in the 'snippets' database """
     logging.info("Writing {!r}:{!r} to {!r}".format(name, snippet, filename))
     cursor = connection.cursor()
     try:
         command = "insert into snippets values (%s, %s)"
         cursor.execute(command, (name, snippet))
+        print "Stored {!r} as {!r}".format(snippet, name)
     except psycopg2.IntegrityError as e:
         connection.rollback()
         command = "update snippets set message=%s where keyword=%s"
         cursor.execute(command, (snippet, name))
+        print "hey!"
     connection.commit()
     logging.debug("Snippet stored successfully.")
     return name, snippet
@@ -49,21 +51,10 @@ def get(name):
     #connection.commit()
     logging.debug("Snippet retrieved successfully.")
     
-    
-
-    #snippet = None
-    # with open("snippets.csv", "r") as f:
-    #     reader = csv.reader(f, delimiter=",")
-    #     for row in reader:
-    #         if row[0] == name:
-    #           return row[1]
-    #         else:
-    #           pass
 def list():
     logging.error("FIXME: Unimplemented - list")
     logging.info("Retrieving list")
     logging.debug("Retrieving list")
-    #snippet = None
     cursor = connection.cursor()
     command = "select keyword from snippets" 
     cursor.execute(command)
@@ -106,14 +97,12 @@ def main():
 
     if command == "put":
         name, snippet = put(**arguments)
-        print "Stored {!r} as {!r}".format(snippet, name)
     elif command == "get":
-        #add warning if snippet does not exist
         name = get(**arguments)
         if name:
             print "Found snippet: {!r}".format(name)
         else: 
-            pass
+            print "There is no snippet with that name - try again!"
     elif command == "list":
         get_list = list()
         print "Here are the available snippet names: \n" + str(get_list)
