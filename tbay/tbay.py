@@ -33,3 +33,9 @@ class Bid(Base):
 	bid = Column(Integer, nullable=False)
 
 Base.metadata.create_all(engine)
+
+beyonce = User()
+beyonce.username = "bknowles"
+beyonce.password = "crazyinlove"
+session.add(beyonce)
+session.commit()
