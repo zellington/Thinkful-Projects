@@ -14,6 +14,7 @@ def main():
     """ Main function """
     repositories = get_repositories(sys.argv[1])
     print repositories
+    
 
 if __name__ == "__main__":
     main()
