@@ -1,0 +1,72 @@
+
+/**{
+	border: 1px solid red;
+}
+*/
+.availableitems{
+	padding-top: 100px;
+    padding-left: 10%;
+    width: 39%;
+    float:left;
+    overflow: hidden;
+
+}
+h1 {
+	
+	margin: 0em;
+}
+
+
+.checkboxgroup ul {
+  margin: 0;
+  list-style: none;
+ float: left;
+  width:40%;
+}
+
+li {
+	padding:10px 0px 10px 0px;
+}
+
+#addcartbutton{
+	float: right;
+	width: 50%;
+    padding-top: 10%;
+}
+
+
+.buttonwrapper{
+	clear:left;
+	padding-top: 10%;
+}
+
+.addtobutton {
+	text-shadow: none;
+    border-style: none;
+    border-radius: 4px;
+    padding: 10px 10px;
+    line-height: 1.33;
+    background-color: #f15a29;
+}
+
+.addservicebutton, .removebutton{
+	text-shadow: none;
+    border-style: none;
+    border-radius: 4px;
+    padding: 5px 5px;
+    line-height: 1.00;
+    background-color: #f15a29;
+}
+
+
+.cart{
+	padding-top: 100px;
+	float:right;
+	width:50%;
+}
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Shopping List</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<link rel="stylesheet" type="text/css" href="css/shoppingstyle.css">
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script src="js/app.js"></script>
+</head>
+<body>
+
+
+	<section class="availableitems">
+		<div class="checkboxgroup">
+			<h1>List of available items</h1>
+			<ul id="itemlist">
+			    <li><input type="checkbox" value="Sugar"/><label>Sugar</label>  </li>
+			    <li><input type="checkbox" value="Milk"  checked /><label>Milk</label></li>
+			    <li><input type="checkbox" value="Bread"/><label>Bread</label>  </li>
+			    
+		 	</ul>
+		</div>
+
+		<div id="addcartbutton">
+
+			<button class="addtobutton">Add to cart</button>
+			
+		</div>
+		
+		<div class="buttonwrapper">
+		 	<input type="text" class ="newitem"/>
+    	 	<button class="addservicebutton">Add</button>
+
+    	</div> 
+
+	</section>
+
+
+	<section class="cart">
+		<div class="content">
+
+			<img class="icons" width="100px" height="127px" src="images/shopping-cart-icon.jpg" alt="Cart" >
+			<ul id="cartitems">
+			    
+		 	</ul>
+			
+			<button class="removebutton">Remove</button>
+
+		</div>		
+	</section>
+
+	
+</body>
+</html>
